@@ -1,15 +1,14 @@
 .main {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6rem;
-  min-height: 100vh;
+  padding: 2rem;
+  height: 100vh;
+  overflow: auto;
+  scroll-behavior: smooth;
 }
 
 .circularProgress {
   position: relative;
   display: inline-flex;
+  margin: 5px 0 0 10px;
 }
 
 .progress {
@@ -32,6 +31,38 @@
 }
 
 .movie {
+  width: var(--img-width);
+}
+
+.imgWrapper {
+  position: relative;
+  width: 100%;
+  height: var(--img-height);
+}
+
+.image {
+  object-fit: cover; /* preserve aspect ratio */
+  object-position: center;
+}
+
+.select {
+  margin-bottom: 10px;
+  width: 250px;
+}
+
+.button {
   display: block;
-  width: 200px;
+}
+
+.stickyButton {
+  position: sticky!important; /* mui specificity */
+  display: block!important;
+  top: 20px;
+  z-index: 10;
+  margin-bottom: 10px!important;
+  text-transform: none!important;
+}
+
+.date {
+  color: rgb(0 0 0 / 60%);
 }

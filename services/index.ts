@@ -2,8 +2,7 @@ import { Movies, SortBy } from '../types';
 
 const baseUrl = 'https://api.themoviedb.org/3';
 
-const api_key = '92b418e837b833be308bbfb1fb2aca1e';
-
+const api_key = process.env.NEXT_PUBLIC_API_KEY;
 const language = 'en-US';
 const timezone = 'America/New_York';
 

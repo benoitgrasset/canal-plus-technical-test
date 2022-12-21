@@ -1,4 +1,4 @@
-type Result = {
+export type Result = {
   adult: boolean;
   backdrop_path: string | null;
   first_air_date: string;
