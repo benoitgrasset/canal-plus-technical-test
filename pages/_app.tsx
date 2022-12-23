@@ -7,7 +7,7 @@ import { Result } from '../types';
 
 type Context = {
   id: number | null;
-  result: Result | null;
+  result: Result | undefined;
   // eslint-disable-next-line no-unused-vars
   updateResult: (result: Result) => void;
 };
@@ -17,9 +17,9 @@ export const AppContext = createContext<Context | null>(null);
 export default function App({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient();
 
-  const [result, setResult] = useState<Result | null>(null);
+  const [result, setResult] = useState<Result | undefined>(undefined);
 
-  const updateResult = (result: Result | null) => {
+  const updateResult = (result: Result) => {
     setResult(result);
   };
 

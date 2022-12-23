@@ -1,39 +1,38 @@
+import ArrowUpward from '@mui/icons-material/ArrowUpward';
+import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import TextField from '@mui/material/TextField';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import Image from 'next/image';
-import Link from 'next/link';
-import { FC, useContext, useEffect, useRef, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
-import placeholder from '../assets/placeholder.png';
-import CircularProgressWithLabel from '../components/CircularProgressWithLabel';
 import Loader from '../components/Loader';
+import Movie from '../components/Movie';
 import { NoData } from '../components/NoData';
 import { getMovies } from '../services';
 import styles from '../styles/Home.module.css';
 import { Movies, SortBy } from '../types';
-import { rgbDataURL } from '../utils';
-import { AppContext } from './_app';
-
-export const imagePath = `https://image.tmdb.org/t/p/original`;
+import { basicFilter } from '../utils';
 
 const itemLabels = {
-  'popularity.desc': 'popularity desc',
-  'popularity.asc': 'popularity asc',
-  'release_date.asc': 'release date asc',
-  'release_date.desc': 'release date desc',
-  'revenue.asc': 'revenue asc',
-  'revenue.desc': 'revenue desc',
-  'primary_release_date.asc': 'primary release_date asc',
-  'primary_release_date.desc': 'primary release_date desc',
-  'original_title.asc': 'original title asc',
-  'original_title.desc': 'original title desc',
-  'vote_average.asc': 'vote average asc',
-  'vote_average.desc': 'vote average desc',
-  'vote_count.asc': 'vote count asc',
-  'vote_count.desc': 'vote count desc',
-};
+  'popularity.desc': 'popularity descending',
+  'popularity.asc': 'popularity ascending',
+  'release_date.asc': 'release date ascending',
+  'release_date.desc': 'release date descending',
+  'revenue.asc': 'revenue ascending',
+  'revenue.desc': 'revenue descending',
+  'primary_release_date.asc': 'primary release date ascending',
+  'primary_release_date.desc': 'primary release date descending',
+  'original_title.asc': 'original title ascending',
+  'original_title.desc': 'original title descending',
+  'vote_average.asc': 'vote average ascending',
+  'vote_average.desc': 'vote average descending',
+  'vote_count.asc': 'vote count ascending',
+  'vote_count.desc': 'vote count descending',
+} as const;
 
 const items = Object.keys(itemLabels) as SortBy[];
 
@@ -60,9 +59,18 @@ const MoviesPage: FC = () => {
   const topRef = useRef<null | HTMLDivElement>(null);
   const { ref, inView } = useInView();
   const [sortBy, setSortBy] = useState<SortBy>(items[0]);
-  const { updateResult } = useContext(AppContext)!;
+  const [name, setName] = useState('');
+  const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
+  };
 
-  const handleChange = (event: SelectChangeEvent) => {
+  const handleSearch = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Enter') {
+      console.log('search: ', name);
+    }
+  };
+
+  const handleSelectChange = (event: SelectChangeEvent) => {
     setSortBy(event.target.value as SortBy);
     remove();
   };
@@ -96,7 +104,28 @@ const MoviesPage: FC = () => {
   return (
     <>
       <div ref={topRef} />
-      <Select onChange={handleChange} value={sortBy} className={styles.select}>
+      <TextField
+        variant="outlined"
+        label="Search a movie"
+        fullWidth
+        value={name}
+        onChange={handleTextChange}
+        onKeyDown={handleSearch}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
+                <SearchIcon color="primary" />
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+      />
+      <Select
+        onChange={handleSelectChange}
+        value={sortBy}
+        className={styles.select}
+      >
         {items.map((item, index) => {
           return (
             <MenuItem key={index} value={item}>
@@ -109,48 +138,19 @@ const MoviesPage: FC = () => {
         variant="contained"
         onClick={handleScrollToTop}
         classes={{ root: styles.stickyButton }}
-        color="secondary"
+        color="primary"
       >
-        Scroll to top
+        <div className={styles.buttonContent}>
+          <span>Scroll to top</span>
+          <ArrowUpward />
+        </div>
       </Button>
 
       <div className={styles.movies}>
         {movies.pages.map((page) =>
-          page.results.map((result) => {
-            const { name, id, first_air_date, popularity, poster_path } =
-              result;
-            const imgPath = poster_path ? imagePath + poster_path : placeholder;
-            return (
-              <div key={id} className={styles.movie}>
-                <Link
-                  href={`/movie/${id}`}
-                  onClick={() => updateResult(result)}
-                >
-                  <div className={styles.imgWrapper}>
-                    <Image
-                      fill
-                      sizes="200px" /* to avoid warnings */
-                      quality={40} /* for better performances */
-                      src={imgPath}
-                      alt="backdrop"
-                      loading="lazy"
-                      placeholder="blur"
-                      blurDataURL={rgbDataURL(159, 165, 164)}
-                      className={styles.image}
-                    />
-                  </div>
-                </Link>
-                <h3>
-                  <Link href={`/movie/${id}`}>{name}</Link>
-                </h3>
-                <div className={styles.date}>{first_air_date}</div>
-                <CircularProgressWithLabel
-                  value={Math.round(popularity / 50)}
-                  label={Math.round(popularity)}
-                />
-              </div>
-            );
-          })
+          page.results
+            .filter((result) => basicFilter(result.name, name))
+            .map((result) => <Movie key={result.id} result={result} />)
         )}
       </div>
 
