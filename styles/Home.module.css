@@ -81,3 +81,8 @@
 .date {
   color: rgb(0 0 0 / 60%);
 }
+
+.noData {
+  width: 100%;
+  text-align: center;
+}
