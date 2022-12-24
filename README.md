@@ -35,7 +35,13 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Technos
 
-`NextJS`, `mui`, `react-query`, `typescript`
+`NextJS` and `Vercel` for deployment
+
+[mui](https://mui.com/material-ui/getting-started/overview/) UI library
+
+[react-query](https://tanstack.com/query/v4) hooks for fetching, aching and updating state
+
+`typescript` for type safety
 
 ## TODO
 
@@ -43,6 +49,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - add unit tests with `react-testing-library`
 - update movie detail page
 - improve circle progress layout, le remonter
-- barre de recherche
 - toggle buttons catégories
 - clean du fichier CSS ??
+- filtres et sort()

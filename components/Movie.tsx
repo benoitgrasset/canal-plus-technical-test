@@ -10,7 +10,7 @@ import { rgbDataURL } from '../utils/blurDataURL';
 import { imagePath } from '../utils/common';
 
 const Movie: FC<{ result: Result }> = ({ result }) => {
-  const { name, id, first_air_date, popularity, poster_path } = result;
+  const { name, id, first_air_date, poster_path, vote_average } = result;
 
   const imgPath = poster_path ? imagePath + poster_path : placeholder;
 
@@ -38,8 +38,8 @@ const Movie: FC<{ result: Result }> = ({ result }) => {
       </h3>
       <div className={styles.date}>{first_air_date}</div>
       <CircularProgressWithLabel
-        value={Math.round(popularity / 50)}
-        label={Math.round(popularity)}
+        value={vote_average * 10}
+        label={vote_average}
       />
     </div>
   );

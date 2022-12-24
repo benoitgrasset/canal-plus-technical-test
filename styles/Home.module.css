@@ -48,12 +48,17 @@
 }
 
 .movieDetails {
-  width: 400px;
+  width: 1200px;
+  height: 600px;
 }
 
 .select {
   margin: 10px 0;
   width: 250px;
+}
+
+.textfield {
+  margin-bottom: 20px;
 }
 
 .button {
@@ -85,4 +90,36 @@
 .noData {
   width: 100%;
   text-align: center;
+}
+
+.customBg {
+  color: white;
+  height: 100%;
+  background-image: linear-gradient(to right, rgb(31.5 31.5 52.5 / 100%) calc((50vw - 170px) - 340px), rgb(31.5 31.5 52.5 / 84%) 30%, rgb(31.5 31.5 52.5 / 84%) 100%);
+}
+
+.flexContainer {
+  display: flex;
+  gap: 50px;
+  padding: 20px 60px;
+}
+
+.flex1 {
+  flex: 1;
+}
+
+.flex2 {
+  flex: 2;
+}
+
+.flex2 > h1 {
+  margin-bottom: 30px;
+}
+
+.flex2 > div > h3 {
+  margin-bottom: 10px;
+}
+
+.tooltipError {
+  background: red;
 }
