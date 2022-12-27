@@ -1,10 +1,11 @@
 import CircularProgress from '@mui/material/CircularProgress';
 import { FC } from 'react';
-import styles from '../styles/Home.module.css';
+import { useStyles } from './Components.style';
 
 const Loader: FC = () => {
+  const classes = useStyles();
   return (
-    <div className={styles.noData}>
+    <div className={classes.noData}>
       <h2>Loading...</h2>
       <CircularProgress />
     </div>

@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
-import styles from '../styles/Home.module.css';
+import { useStyles } from './Components.style';
 
 export const NoData: FC<{ children?: React.ReactNode }> = (props) => {
+  const classes = useStyles();
   return (
-    <h2 className={styles.noData}>{props.children || 'No movies fetched'}</h2>
+    <h2 className={classes.noData}>{props.children || 'No movies fetched'}</h2>
   );
 };

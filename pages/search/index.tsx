@@ -4,11 +4,12 @@ import { FC } from 'react';
 import Movie from '../../components/Movie';
 import { NoData } from '../../components/NoData';
 import { getSearch } from '../../services';
-import styles from '../../styles/Home.module.css';
+import { useStyles } from '../../styles/index.style';
 
 const Search: FC = () => {
   const router = useRouter();
   const { query } = router.query;
+  const classes = useStyles();
 
   const { data: searchMovies } = useQuery(
     ['searchMovies'],
@@ -23,8 +24,8 @@ const Search: FC = () => {
   }
 
   return (
-    <main className={styles.main}>
-      <div className={styles.movies}>
+    <main className={classes.main}>
+      <div className={classes.movies}>
         {searchMovies.results.map((result) => (
           <Movie key={result.id} result={result} />
         ))}

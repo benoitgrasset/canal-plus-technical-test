@@ -2,7 +2,7 @@ import CircularProgress, {
   CircularProgressProps,
 } from '@mui/material/CircularProgress';
 import { FC } from 'react';
-import styles from '../styles/Home.module.css';
+import { useStyles } from './Components.style';
 
 const getProgressColor = (value: number | undefined) => {
   if (!value) return 'black';
@@ -15,9 +15,10 @@ const getProgressColor = (value: number | undefined) => {
 const CircularProgressWithLabel: FC<
   CircularProgressProps & { label: number }
 > = (props) => {
+  const classes = useStyles();
   const color = getProgressColor(props.value);
   return (
-    <div className={styles.circularProgress} style={{ color }}>
+    <div className={classes.circularProgress} style={{ color }}>
       <CircularProgress
         color="inherit"
         thickness={4}
@@ -25,7 +26,7 @@ const CircularProgressWithLabel: FC<
         variant="determinate"
         {...props}
       />
-      <div className={styles.progress}>{props.label}</div>
+      <div className={classes.progress}>{props.label}</div>
     </div>
   );
 };

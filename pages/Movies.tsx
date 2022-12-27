@@ -17,7 +17,7 @@ import Loader from '../components/Loader';
 import Movie from '../components/Movie';
 import { NoData } from '../components/NoData';
 import { getMovies } from '../services';
-import styles from '../styles/Home.module.css';
+import { useStyles } from '../styles/index.style';
 import { itemLabels, Movies, SortBy } from '../types';
 
 const hasQueryError = (query: string) => query.trim() === '';
@@ -44,6 +44,7 @@ const MoviesPage: FC = () => {
     }
   );
 
+  const classes = useStyles();
   const topRef = useRef<null | HTMLDivElement>(null);
   const { ref, inView } = useInView();
   const [sortBy, setSortBy] = useState<SortBy>(items[0]);
@@ -105,17 +106,18 @@ const MoviesPage: FC = () => {
     <>
       <div ref={topRef} />
       <Tooltip
-        classes={{ tooltip: styles.tooltipError }}
+        classes={{ tooltip: classes.tooltipError }}
         title={queryError ? 'Query must not be empty' : ''}
       >
         <TextField
+          id="movie-search"
           variant="outlined"
           label="Search a movie"
           fullWidth
           value={query}
           onChange={handleTextChange}
           onKeyDown={handleEnterSearch}
-          className={styles.textfield}
+          className={classes.textfield}
           error={queryError}
           InputProps={{
             endAdornment: (
@@ -138,7 +140,7 @@ const MoviesPage: FC = () => {
         <Select
           onChange={handleSelectChange}
           value={sortBy}
-          className={styles.select}
+          className={classes.select}
         >
           {items.map((item, index) => {
             return (
@@ -152,16 +154,16 @@ const MoviesPage: FC = () => {
       <Button
         variant="contained"
         onClick={handleScrollToTop}
-        classes={{ root: styles.stickyButton }}
+        classes={{ root: classes.stickyButton }}
         color="primary"
       >
-        <div className={styles.buttonContent}>
-          <span>Scroll to top</span>
+        <div className={classes.buttonContent}>
+          <span className={classes.marginRight}>Scroll to top</span>
           <ArrowUpward />
         </div>
       </Button>
 
-      <div className={styles.movies}>
+      <div className={classes.movies}>
         {movies.pages.map((page) =>
           page.results.map((result) => (
             <Movie key={result.id} result={result} />
@@ -173,7 +175,7 @@ const MoviesPage: FC = () => {
         ref={ref}
         onClick={() => fetchNextPage()}
         disabled={!hasNextPage || isFetchingNextPage}
-        className={styles.button}
+        className={classes.button}
       >
         {isFetchingNextPage ? 'Loading more movies...' : notFetchingText}
       </Button>

@@ -7,7 +7,7 @@ import placeholder from '../../assets/placeholder.png';
 import CircularProgressWithLabel from '../../components/CircularProgressWithLabel';
 import { NoData } from '../../components/NoData';
 import { getGenres } from '../../services';
-import styles from '../../styles/Home.module.css';
+import { useStyles } from '../../styles/index.style';
 import { rgbDataURL } from '../../utils/blurDataURL';
 import { imagePath } from '../../utils/common';
 import { AppContext } from '../_app';
@@ -17,6 +17,7 @@ const width = 300;
 const Movie: FC = () => {
   const result = useContext(AppContext)?.result;
 
+  const classes = useStyles();
   const router = useRouter();
   const { id } = router.query;
 
@@ -50,8 +51,8 @@ const Movie: FC = () => {
     .map((genre) => genre.name);
 
   return (
-    <main className={styles.main}>
-      <div className={styles.movieDetails}>
+    <main className={classes.main}>
+      <div className={classes.movieDetails}>
         <div
           style={{
             backgroundImage: `url(${backdropPath})`,
@@ -60,9 +61,9 @@ const Movie: FC = () => {
             height: '100%',
           }}
         >
-          <div className={styles.customBg}>
-            <div className={styles.flexContainer}>
-              <div className={clsx(styles.imgWrapper, styles.flex1)}>
+          <div className={classes.customBg}>
+            <div className={classes.flexContainer}>
+              <div className={clsx(classes.imgWrapper, classes.flex1)}>
                 <Image
                   quality={75} /* for better performances */
                   src={posterPath}
@@ -70,13 +71,13 @@ const Movie: FC = () => {
                   loading="lazy"
                   placeholder="blur"
                   blurDataURL={rgbDataURL(159, 165, 164)}
-                  className={styles.image}
+                  className={classes.image}
                   width={width}
                   height={(width * 3) / 2}
                 />
               </div>
-              <div className={styles.flex2}>
-                <h1>{name}</h1>
+              <div className={classes.flex2}>
+                <h1 className={classes.title}>{name}</h1>
                 <div>
                   <h3>Average votes: </h3>
                   <CircularProgressWithLabel

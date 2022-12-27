@@ -33,9 +33,13 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
+The app is deployed [here](canal-plus-technical-test-lun1fhy36-benoitgrasset.vercel.app)
+
 ## Technos
 
 `NextJS` and `Vercel` for deployment
+
+[cssinjs](https://cssinjs.org/?v=v10.9.2) for styling
 
 [mui](https://mui.com/material-ui/getting-started/overview/) UI library
 
