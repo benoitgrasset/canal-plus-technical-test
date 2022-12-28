@@ -33,19 +33,46 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-The app is deployed [here](canal-plus-technical-test-lun1fhy36-benoitgrasset.vercel.app)
+The app is deployed [here](https://canal-plus-technical-test.vercel.app/)
+
+## What is expected
+
+- To render a list of movies or series from [themoviedb](https://www.themoviedb.org/)
+
+- To view details about a movie or a serie by clicking on it
+
+## API
+
+The request can be passed using the following key:
+API key (v3): `92b418e837b833be308bbfb1fb2aca1e`
+
+Documentation:
+https://developers.themoviedb.org/3/
+
+HTTP request exemple:
+
+```
+    GET
+    https://api.themoviedb.org/3/discover/tv?api_key=92b418e837b833be308bbfb1fb2aca1e&language=en-
+US&sort_by=popularity.desc&page=1&timezone=America/New_York&include_null_first_air_dates=false
+```
 
 ## Technos
 
-`NextJS` and `Vercel` for deployment
+`NextJS` (server side rendering, lazy loading for images, ...) and `create-next-app` to create a new Next.js app within seconds
 
-[cssinjs](https://cssinjs.org/?v=v10.9.2) for styling
+`Vercel` for deployment, simply deploy a Next app to the cloud
 
-[mui](https://mui.com/material-ui/getting-started/overview/) UI library
+[cssinjs](https://cssinjs.org/?v=v10.9.2) for styling, with robustness
 
-[react-query](https://tanstack.com/query/v4) hooks for fetching, aching and updating state
+[mui](https://mui.com/material-ui/getting-started/overview/) UI library to have nice components faster
+
+[react-query](https://tanstack.com/query/v4) hooks for fetching, caching and updating state. To use infinite scrolling and load dynamically movies when scrolling.
+Also to store the data in cache and use it when needed
 
 `typescript` for type safety
+
+`react-testing-library` for unit tests
 
 ## TODO
 
@@ -53,6 +80,3 @@ The app is deployed [here](canal-plus-technical-test-lun1fhy36-benoitgrasset.ver
 - add unit tests with `react-testing-library`
 - update movie detail page
 - improve circle progress layout, le remonter
-- toggle buttons catégories
-- clean du fichier CSS ??
-- filtres et sort()
