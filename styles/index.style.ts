@@ -21,6 +21,16 @@ export const useStyles = createUseStyles({
     color: 'white',
   },
 
+  iconButton: {
+    height: '40px',
+    marginLeft: '10px',
+  },
+
+  filters: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+
   movies: {
     display: 'flex',
     gap: 'calc(var(--spacing) * 2)',
@@ -55,6 +65,7 @@ export const useStyles = createUseStyles({
   textfield: {
     background: 'white',
     marginRight: '200px',
+    borderRadius: 'var(--border-radius)',
   },
 
   button: {
@@ -68,6 +79,7 @@ export const useStyles = createUseStyles({
     zIndex: 99,
     margin: '0 0 var(--spacing) auto',
     textTransform: 'none',
+    fontWeight: 600,
   },
 
   buttonContent: {

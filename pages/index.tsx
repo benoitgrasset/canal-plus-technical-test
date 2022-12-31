@@ -1,9 +1,12 @@
+import ArrowDownward from '@mui/icons-material/ArrowDownward';
 import ArrowUpward from '@mui/icons-material/ArrowUpward';
 import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
+import IconButton from '@mui/material/IconButton';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Tooltip from '@mui/material/Tooltip';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { FC, useEffect, useRef, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
@@ -12,9 +15,24 @@ import MovieCard from '../components/MovieCard';
 import { NoData } from '../components/NoData';
 import { getMovies } from '../services';
 import { useStyles } from '../styles/index.style';
-import { itemLabels, Movies, SortBy } from '../types';
+import { Movies, Order, SortBy } from '../types';
 
 const staleTime = 1 * 60 * 1000; // 1 minuts
+
+const itemLabels: Record<SortBy, string> = {
+  popularity: 'popularity',
+  release_date: 'release date',
+  revenue: 'revenue',
+  primary_release_date: 'primary release date',
+  original_title: 'original title',
+  vote_average: 'vote average',
+  vote_count: 'vote count',
+};
+
+const ordersLabels: Record<Order, string> = {
+  asc: 'ascending order',
+  desc: 'descending order',
+};
 
 const items = Object.keys(itemLabels) as SortBy[];
 
@@ -30,7 +48,7 @@ const Home: FC = () => {
     remove,
   } = useInfiniteQuery<Movies, Error>(
     ['movies'],
-    ({ pageParam }) => getMovies(pageParam, sortBy),
+    ({ pageParam }) => getMovies(pageParam, `${sortBy}.${order}`),
     {
       staleTime,
       getNextPageParam: (_lastPage, allPages) => allPages.length + 1,
@@ -42,6 +60,7 @@ const Home: FC = () => {
   const topRef = useRef<null | HTMLDivElement>(null);
   const { ref, inView } = useInView();
   const [sortBy, setSortBy] = useState<SortBy>(items[0]);
+  const [order, setOrder] = useState<Order>('desc');
 
   const handleSelectChange = (event: SelectChangeEvent) => {
     setSortBy(event.target.value as SortBy);
@@ -50,6 +69,11 @@ const Home: FC = () => {
 
   const handleScrollToTop = () => {
     topRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleOrderClick = () => {
+    setOrder((order) => (order === 'asc' ? 'desc' : 'asc'));
+    remove();
   };
 
   useEffect(() => {
@@ -77,22 +101,30 @@ const Home: FC = () => {
   return (
     <>
       <div ref={topRef} />
-      <FormControl>
-        <InputLabel>Filter</InputLabel>
-        <Select
-          onChange={handleSelectChange}
-          value={sortBy}
-          className={classes.select}
-        >
-          {items.map((item, index) => {
-            return (
-              <MenuItem key={index} value={item}>
-                {itemLabels[item]}
-              </MenuItem>
-            );
-          })}
-        </Select>
-      </FormControl>
+      <div className={classes.filters}>
+        <FormControl>
+          <InputLabel>Filter</InputLabel>
+          <Select
+            onChange={handleSelectChange}
+            value={sortBy}
+            className={classes.select}
+          >
+            {items.map((item, index) => {
+              return (
+                <MenuItem key={index} value={item}>
+                  {itemLabels[item]}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
+        <Tooltip title={ordersLabels[order]}>
+          <IconButton onClick={handleOrderClick} className={classes.iconButton}>
+            {order === 'asc' ? <ArrowUpward /> : <ArrowDownward />}
+          </IconButton>
+        </Tooltip>
+      </div>
+
       <Button
         variant="contained"
         onClick={handleScrollToTop}

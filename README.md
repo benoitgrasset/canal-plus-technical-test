@@ -78,5 +78,4 @@ Also to store the data in cache and use it when needed
 
 - improve Readme
 - add unit tests with `react-testing-library`
-- update movie detail page
-- improve circle progress layout, le remonter
+- séparer filtre et order

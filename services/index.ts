@@ -1,4 +1,4 @@
-import { Genres, Images, MovieDetail, Movies, SortBy } from '../types';
+import { Genres, Images, MovieDetail, Movies } from '../types';
 
 const baseUrl = 'https://api.themoviedb.org/3';
 
@@ -8,7 +8,7 @@ const timezone = 'America/New_York';
 
 export const getMovies = async (
   page: number = 1,
-  sort_by: SortBy = 'popularity.desc'
+  sort_by: string = 'popularity.desc'
 ) => {
   const url = `${baseUrl}/discover/movie?api_key=${api_key}&language=${language}&sort_by=${sort_by}&page=${page}&timezone=${timezone}&include_null_first_air_dates=false`;
 

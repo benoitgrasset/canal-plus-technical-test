@@ -88,21 +88,13 @@ type Genre = {
 
 export type Genres = { genres: Genre[] };
 
-export const itemLabels = {
-  'popularity.desc': 'popularity descending',
-  'popularity.asc': 'popularity ascending',
-  'release_date.asc': 'release date ascending',
-  'release_date.desc': 'release date descending',
-  'revenue.asc': 'revenue ascending',
-  'revenue.desc': 'revenue descending',
-  'primary_release_date.asc': 'primary release date ascending',
-  'primary_release_date.desc': 'primary release date descending',
-  'original_title.asc': 'original title ascending',
-  'original_title.desc': 'original title descending',
-  'vote_average.asc': 'vote average ascending',
-  'vote_average.desc': 'vote average descending',
-  'vote_count.asc': 'vote count ascending',
-  'vote_count.desc': 'vote count descending',
-} as const;
+export type SortBy =
+  | 'popularity'
+  | 'release_date'
+  | 'revenue'
+  | 'primary_release_date'
+  | 'original_title'
+  | 'vote_average'
+  | 'vote_count';
 
-export type SortBy = keyof typeof itemLabels;
+export type Order = 'asc' | 'desc';
