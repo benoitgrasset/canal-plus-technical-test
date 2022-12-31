@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useStyles } from './Components.style';
+import { useStyles } from './index.style';
 
 export const NoData: FC<{ children?: React.ReactNode }> = (props) => {
   const classes = useStyles();

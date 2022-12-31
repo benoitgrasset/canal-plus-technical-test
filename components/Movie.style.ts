@@ -13,6 +13,9 @@ export const useStyles = createUseStyles({
     objectFit: 'cover' /* preserve aspect ratio */,
     objectPosition: 'center',
     borderRadius: ' var(--border-radius)',
+    '&:hover': {
+      boxShadow: 'rgb(0 0 0 / 55%) 0 5px 15px',
+    },
   },
   date: {
     color: 'rgb(0 0 0 / 60%)',

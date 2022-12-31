@@ -10,7 +10,7 @@ export const getMovies = async (
   page: number = 1,
   sort_by: SortBy = 'popularity.desc'
 ) => {
-  const url = `${baseUrl}/discover/tv?api_key=${api_key}&language=${language}&sort_by=${sort_by}&page=${page}&timezone=${timezone}&include_null_first_air_dates=false`;
+  const url = `${baseUrl}/discover/movie?api_key=${api_key}&language=${language}&sort_by=${sort_by}&page=${page}&timezone=${timezone}&include_null_first_air_dates=false`;
 
   const movies: Promise<Movies> = await fetch(url)
     .then((res) => res.json())
@@ -30,22 +30,20 @@ export const getGenres = async () => {
 };
 
 /**
- * only for movies
  * @param movie_id
  * @returns
  */
 export const getMovieDetails = async (movie_id: number) => {
   const url = `${baseUrl}/movie/${movie_id}?api_key=${api_key}&language=en-US`;
 
-  const movie: Promise<MovieDetail> = await fetch(url)
+  const details: Promise<MovieDetail> = await fetch(url)
     .then((res) => res.json())
     .catch((error) => console.error(error.message));
 
-  return movie;
+  return details;
 };
 
 /**
- * only for movies
  * @param movie_id
  * @returns
  */

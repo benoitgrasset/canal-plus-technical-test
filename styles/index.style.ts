@@ -1,11 +1,24 @@
 import { createUseStyles } from 'react-jss';
 
+type StaticImageData = {
+  src: string;
+  height: number;
+  width: number;
+  blurDataURL?: string;
+};
+
 export const useStyles = createUseStyles({
   main: {
     padding: '2rem',
-    height: '100vh',
+    height: 'calc(100vh - 64px)',
     overflow: 'auto',
     scrollBehavior: 'smooth',
+    marginTop: '64px',
+  },
+
+  backButton: {
+    position: 'absolute',
+    color: 'white',
   },
 
   movies: {
@@ -31,8 +44,7 @@ export const useStyles = createUseStyles({
   },
 
   movieDetails: {
-    width: '1200px',
-    height: '600px',
+    width: '100%',
   },
 
   select: {
@@ -41,7 +53,8 @@ export const useStyles = createUseStyles({
   },
 
   textfield: {
-    marginBottom: 'calc(var(--spacing) * 2)',
+    background: 'white',
+    marginRight: '200px',
   },
 
   button: {
@@ -49,12 +62,12 @@ export const useStyles = createUseStyles({
   },
 
   stickyButton: {
-    position: 'sticky!important' /* mui specificity */,
-    display: 'block!important',
+    position: 'sticky!important',
+    display: 'block',
     top: '20px',
-    zIndex: 10,
-    margin: '0 auto var(--spacing)!important',
-    textTransform: 'none!important',
+    zIndex: 99,
+    margin: '0 0 var(--spacing) auto',
+    textTransform: 'none',
   },
 
   buttonContent: {
@@ -70,6 +83,15 @@ export const useStyles = createUseStyles({
     color: 'rgb(0 0 0 / 60%)',
   },
 
+  movieBackground: (props: { backdropPath: string | StaticImageData }) => {
+    return {
+      backgroundImage: `url(${props?.backdropPath})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center top',
+      height: '100%',
+    };
+  },
+
   customBg: {
     color: 'white',
     height: '100%',
@@ -77,10 +99,23 @@ export const useStyles = createUseStyles({
       'linear-gradient(to right, rgb(31.5 31.5 52.5 / 100%) calc((50vw - 170px) - 340px), rgb(31.5 31.5 52.5 / 84%) 30%, rgb(31.5 31.5 52.5 / 84%) 100%)',
   },
 
+  section: {
+    display: 'flex',
+    gap: 20,
+  },
+
   flexContainer: {
     display: 'flex',
     gap: '50px',
-    padding: '20px 60px',
+    padding: '30px 60px',
+  },
+  '@media (max-width: 800px)': {
+    flexContainer: {
+      flexDirection: 'column',
+    },
+    movieDetails: {
+      height: '1300px',
+    },
   },
 
   flex1: {
@@ -88,19 +123,56 @@ export const useStyles = createUseStyles({
   },
 
   flex2: {
+    lineHeight: 1.3,
     flex: 2,
     '& div': {
       '& h3': {
-        marginBottom: 'var(--spacing)',
+        margin: 'calc(var(--spacing) * 2) 0 5px 0',
       },
     },
   },
 
   title: {
-    marginBottom: 'calc(var(--spacing) * 3)',
+    marginBottom: 'var(--spacing)',
+  },
+
+  genres: {
+    '& :not(:last-child):after': {
+      content: '", "',
+    },
   },
 
   tooltipError: {
     background: 'red',
+  },
+
+  notFoundContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginTop: '60px',
+    '& > *': {
+      margin: '10px',
+    },
+  },
+
+  navbar: {
+    width: '100%',
+    height: '64px',
+    background: 'rgb(3,37,65)',
+    color: 'white',
+    fontWeight: 600,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    zIndex: 100,
+    fontSize: '18px',
+  },
+
+  nav: {
+    marginLeft: '60px',
   },
 });

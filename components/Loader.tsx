@@ -1,6 +1,6 @@
 import CircularProgress from '@mui/material/CircularProgress';
 import { FC } from 'react';
-import { useStyles } from './Components.style';
+import { useStyles } from './index.style';
 
 const Loader: FC = () => {
   const classes = useStyles();

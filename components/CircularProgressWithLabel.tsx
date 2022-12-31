@@ -2,7 +2,7 @@ import CircularProgress, {
   CircularProgressProps,
 } from '@mui/material/CircularProgress';
 import { FC } from 'react';
-import { useStyles } from './Components.style';
+import { useStyles } from './index.style';
 
 const getProgressColor = (value: number | undefined) => {
   if (!value) return 'black';

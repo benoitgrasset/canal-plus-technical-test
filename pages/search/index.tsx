@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
-import Movie from '../../components/Movie';
+import MovieCard from '../../components/MovieCard';
 import { NoData } from '../../components/NoData';
 import { getSearch } from '../../services';
 import { useStyles } from '../../styles/index.style';
@@ -27,7 +27,7 @@ const Search: FC = () => {
     <main className={classes.main}>
       <div className={classes.movies}>
         {searchMovies.results.map((result) => (
-          <Movie key={result.id} result={result} />
+          <MovieCard key={result.id} result={result} />
         ))}
       </div>
     </main>
