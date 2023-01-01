@@ -1,19 +1,20 @@
 import { createUseStyles } from 'react-jss';
+import { imgHeight, imgWidth, theme } from '../styles/theme';
 
 export const useStyles = createUseStyles(
   {
     movie: {
-      width: 'var(--img-width)',
+      width: `${imgWidth}px`,
     },
     imgWrapper: {
       position: 'relative',
       width: '100%',
-      height: 'var(--img-height)',
+      height: `${imgHeight}px`,
     },
     image: {
       objectFit: 'cover' /* preserve aspect ratio */,
       objectPosition: 'center',
-      borderRadius: ' var(--border-radius)',
+      borderRadius: theme.borderRadius,
       '&:hover': {
         boxShadow: 'rgb(0 0 0 / 55%) 0 5px 15px',
       },

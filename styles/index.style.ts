@@ -1,4 +1,5 @@
 import { createUseStyles } from 'react-jss';
+import { headerHeight, imgHeight, imgWidth, theme } from './theme';
 
 type StaticImageData = {
   src: string;
@@ -8,13 +9,13 @@ type StaticImageData = {
 };
 
 export const useStyles = createUseStyles(
-  {
+  () => ({
     main: {
       padding: '2rem',
-      height: 'calc(100vh - 64px)',
+      height: `calc(100vh - ${headerHeight})`,
       overflow: 'auto',
       scrollBehavior: 'smooth',
-      marginTop: '64px',
+      marginTop: headerHeight,
     },
 
     backButton: {
@@ -34,24 +35,24 @@ export const useStyles = createUseStyles(
 
     movies: {
       display: 'flex',
-      gap: 'calc(var(--spacing) * 2)',
+      gap: `${2 * theme.spacing}px`,
       flexWrap: 'wrap',
     },
 
     movie: {
-      width: 'var(--img-width)',
+      width: `${imgWidth}px`,
     },
 
     imgWrapper: {
       position: 'relative',
       width: '100%',
-      height: 'var(--img-height)',
+      height: `${imgHeight}px`,
     },
 
     image: {
       objectFit: 'cover' /* preserve aspect ratio */,
       objectPosition: 'center',
-      borderRadius: 'var(--border-radius)',
+      borderRadius: theme.borderRadius,
     },
 
     movieDetails: {
@@ -59,14 +60,14 @@ export const useStyles = createUseStyles(
     },
 
     select: {
-      margin: 'var(--spacing) 0',
+      margin: `${theme.spacing}px 0`,
       width: '250px',
     },
 
     textfield: {
       background: 'white',
       marginRight: '200px',
-      borderRadius: 'var(--border-radius)',
+      borderRadius: theme.borderRadius,
     },
 
     button: {
@@ -78,7 +79,7 @@ export const useStyles = createUseStyles(
       display: 'block',
       top: '20px',
       zIndex: 99,
-      margin: '0 0 var(--spacing) auto',
+      margin: `0 0 ${theme.spacing}px auto`,
       textTransform: 'none',
       fontWeight: 600,
     },
@@ -89,7 +90,7 @@ export const useStyles = createUseStyles(
     },
 
     marginRight: {
-      marginRight: 'var(--spacing)',
+      marginRight: `${theme.spacing}px`,
     },
 
     date: {
@@ -140,13 +141,13 @@ export const useStyles = createUseStyles(
       flex: 2,
       '& div': {
         '& h3': {
-          margin: 'calc(var(--spacing) * 2) 0 5px 0',
+          margin: `${2 * theme.spacing}px 0 5px 0`,
         },
       },
     },
 
     title: {
-      marginBottom: 'var(--spacing)',
+      marginBottom: `${theme.spacing}px`,
     },
 
     genres: {
@@ -171,7 +172,7 @@ export const useStyles = createUseStyles(
 
     navbar: {
       width: '100%',
-      height: '64px',
+      height: headerHeight,
       background: 'rgb(3,37,65)',
       color: 'white',
       fontWeight: 600,
@@ -188,6 +189,6 @@ export const useStyles = createUseStyles(
     nav: {
       marginLeft: '60px',
     },
-  },
+  }),
   { link: true }
 );

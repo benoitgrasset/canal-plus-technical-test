@@ -1,10 +1,5 @@
 :root {
-  --spacing: 10px;
-  --max-width: 1100px;
-  --border-radius: 8px;
   --foreground-rgb: 0, 0, 0;
-  --img-width: 160px;
-  --img-height: calc(var(--img-width) * 3 / 2);  /*  aspect ratio 2/3 */
 }
 
 * {

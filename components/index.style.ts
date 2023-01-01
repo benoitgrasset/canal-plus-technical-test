@@ -1,11 +1,12 @@
 import { createUseStyles } from 'react-jss';
+import { theme } from '../styles/theme';
 
 export const useStyles = createUseStyles(
   {
     circularProgress: {
       position: 'absolute',
       display: 'inline-flex',
-      margin: '5px 0 0 var(--spacing)',
+      margin: `5px 0 0 ${theme.spacing}px`,
       background: 'rgb(8 28 34)',
       borderRadius: '50%',
       top: '-30px',
