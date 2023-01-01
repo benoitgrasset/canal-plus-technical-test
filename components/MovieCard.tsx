@@ -32,10 +32,12 @@ const MovieCard: FC<{ result: Result }> = ({ result }) => {
         </div>
       </Link>
       <div className={classes.details}>
-        <CircularProgressWithLabel
-          value={vote_average * 10}
-          label={vote_average}
-        />
+        <div className={classes.circularProgress}>
+          <CircularProgressWithLabel
+            value={vote_average * 10}
+            label={vote_average}
+          />
+        </div>
         <h3>
           <Link href={`/movie/${id}`}>{title}</Link>
         </h3>

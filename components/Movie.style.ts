@@ -26,6 +26,11 @@ export const useStyles = createUseStyles(
       position: 'relative',
       paddingTop: '25px',
     },
+    circularProgress: {
+      position: 'absolute',
+      top: '-30px',
+      left: '7px',
+    },
   },
   { link: true }
 );
