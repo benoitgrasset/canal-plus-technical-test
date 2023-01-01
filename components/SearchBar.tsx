@@ -43,7 +43,7 @@ const SearchBar: FC = () => {
       <TextField
         id="movie-search"
         variant="outlined"
-        label="Search a movie"
+        placeholder="Search a movie"
         value={query}
         onChange={handleTextChange}
         onKeyDown={handleEnterSearch}

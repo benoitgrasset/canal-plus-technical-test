@@ -21,6 +21,10 @@ export const useStyles = createUseStyles(
     date: {
       color: 'rgb(0 0 0 / 60%)',
     },
+    details: {
+      position: 'relative',
+      paddingTop: '25px',
+    },
   },
   { link: true }
 );

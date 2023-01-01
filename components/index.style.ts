@@ -3,11 +3,13 @@ import { createUseStyles } from 'react-jss';
 export const useStyles = createUseStyles(
   {
     circularProgress: {
-      position: 'relative',
+      position: 'absolute',
       display: 'inline-flex',
       margin: '5px 0 0 var(--spacing)',
       background: 'rgb(8 28 34)',
       borderRadius: '50%',
+      top: '-30px',
+      left: '7px',
     },
     progress: {
       top: 0,
