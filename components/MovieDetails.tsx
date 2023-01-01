@@ -42,7 +42,7 @@ const MovieDetails: FC<Props> = ({ result }) => {
             <div className={classes.flexContainer}>
               <div className={clsx(classes.imgWrapper, classes.flex1)}>
                 <Image
-                  quality={75} /* for better performances */
+                  quality={75}
                   src={posterPath}
                   alt="backdrop"
                   loading="lazy"

@@ -17,6 +17,11 @@ const MoviePage: FC = () => {
     return <NoData>No result found</NoData>;
   }
 
+  // if id doesn't exist
+  if (!result.id) {
+    return <NoData>Movie id not found</NoData>;
+  }
+
   return <MovieDetails result={result} />;
 };
 
