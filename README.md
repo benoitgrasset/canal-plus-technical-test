@@ -67,7 +67,7 @@ US&sort_by=popularity.desc&page=1&timezone=America/New_York&include_null_first_a
 
 `Vercel` for deployment, simply deploy a Next app to the cloud
 
-[cssinjs](https://cssinjs.org/?v=v10.9.2) for styling, with robustness
+[cssinjs](https://cssinjs.org/?v=v10.9.2) for styling, to use JavaScript to describe styles
 
 [mui](https://mui.com/material-ui/getting-started/overview/) UI library to have nice components faster
 
@@ -77,8 +77,3 @@ Also to store the data in cache and use it when needed
 `typescript` to add types to Javascript
 
 `react-testing-library` for unit tests
-
-## TODO
-
-- add unit tests with `react-testing-library`
-- create useFetchMovies()
