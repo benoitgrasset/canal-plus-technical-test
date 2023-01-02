@@ -7,17 +7,14 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Tooltip from '@mui/material/Tooltip';
-import { useInfiniteQuery } from '@tanstack/react-query';
 import { FC, useEffect, useRef, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import Loader from '../components/Loader';
 import MovieCard from '../components/MovieCard';
 import { NoData } from '../components/NoData';
-import { getMovies } from '../services';
+import { useFetchMovies } from '../hooks/useFetchMovies';
 import { useStyles } from '../styles/index.style';
-import { Movies, Order, SortBy } from '../types';
-
-const staleTime = 1 * 60 * 1000; // 1 minuts
+import { Order, SortBy } from '../types';
 
 const itemLabels: Record<SortBy, string> = {
   popularity: 'popularity',
@@ -37,30 +34,24 @@ const ordersLabels: Record<Order, string> = {
 const items = Object.keys(itemLabels) as SortBy[];
 
 const Home: FC = () => {
-  const {
-    data: movies,
-    isLoading,
-    error,
-    isFetching,
-    fetchNextPage,
-    isFetchingNextPage,
-    hasNextPage,
-    remove,
-  } = useInfiniteQuery<Movies, Error>(
-    ['movies'],
-    ({ pageParam }) => getMovies(pageParam, `${sortBy}.${order}`),
-    {
-      staleTime,
-      getNextPageParam: (_lastPage, allPages) => allPages.length + 1,
-      keepPreviousData: false,
-    }
-  );
-
   const classes = useStyles();
   const topRef = useRef<null | HTMLDivElement>(null);
   const { ref, inView } = useInView();
   const [sortBy, setSortBy] = useState<SortBy>(items[0]);
   const [order, setOrder] = useState<Order>('desc');
+
+  const sortByOrder = `${sortBy}.${order}`;
+
+  const {
+    remove,
+    movies,
+    fetchNextPage,
+    isLoading,
+    error,
+    hasNextPage,
+    isFetchingNextPage,
+    isFetching,
+  } = useFetchMovies(sortByOrder);
 
   const handleSelectChange = (event: SelectChangeEvent) => {
     setSortBy(event.target.value as SortBy);
@@ -137,7 +128,7 @@ const Home: FC = () => {
         </div>
       </Button>
 
-      <div className={classes.movies}>
+      <div className={classes.movies} data-testid="movies">
         {movies.pages.map((page) =>
           page.results.map((result) => (
             <MovieCard key={result.id} result={result} />

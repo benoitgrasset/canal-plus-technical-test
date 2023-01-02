@@ -1,9 +1,8 @@
-import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
 import MovieCard from '../../components/MovieCard';
 import { NoData } from '../../components/NoData';
-import { getSearch } from '../../services';
+import { useSearchMovies } from '../../hooks/useSearchMovies';
 import { useStyles } from '../../styles/index.style';
 
 const Search: FC = () => {
@@ -11,13 +10,7 @@ const Search: FC = () => {
   const { query } = router.query;
   const classes = useStyles();
 
-  const { data: searchMovies } = useQuery(
-    ['searchMovies'],
-    () => getSearch((query as string) || ''),
-    {
-      enabled: query !== undefined,
-    }
-  );
+  const { searchMovies } = useSearchMovies(query as string);
 
   if (!searchMovies) {
     return <NoData>No result found</NoData>;

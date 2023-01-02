@@ -7,7 +7,7 @@ const NavBar: FC = () => {
   const classes = useStyles();
 
   return (
-    <header className={classes.navbar}>
+    <header className={classes.navbar} data-testid="header">
       <nav className={classes.nav}>
         <Link href="/">Movies</Link>
       </nav>

@@ -81,3 +81,4 @@ Also to store the data in cache and use it when needed
 ## TODO
 
 - add unit tests with `react-testing-library`
+- create useFetchMovies()

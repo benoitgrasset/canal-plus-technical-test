@@ -1,13 +1,9 @@
 export type Result = {
   adult: boolean;
   backdrop_path: string | null;
-  first_air_date: string;
   genre_ids: number[];
   id: number;
-  name: string;
-  origin_country: string[];
   original_language: string;
-  original_name: string;
   original_title: string;
   overview: string;
   popularity: number;
@@ -39,7 +35,7 @@ export type MovieDetail = {
   original_title: string;
   overview: string;
   popularity: number;
-  poster_path: null;
+  poster_path: string;
   production_companies: {
     id: number;
     logo_path: string;

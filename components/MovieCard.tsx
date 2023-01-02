@@ -15,7 +15,7 @@ const MovieCard: FC<{ result: Result }> = ({ result }) => {
   const imgPath = poster_path ? imagePath + poster_path : placeholder;
 
   return (
-    <div key={id} className={classes.movie}>
+    <div key={id} className={classes.movie} data-testid={`movie-${id}`}>
       <Link href={`/movie/${id}`}>
         <div className={classes.imgWrapper}>
           <Image
