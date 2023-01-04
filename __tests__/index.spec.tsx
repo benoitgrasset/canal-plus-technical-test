@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen } from '@testing-library/react';
 import 'intersection-observer';
+import mockRouter from 'next-router-mock';
 import 'react-intersection-observer';
 import Layout from '../components/Layout';
 import { useFetchMovies } from '../hooks/useFetchMovies';
@@ -10,6 +11,8 @@ import Home from '../pages/index';
 jest.mock('../hooks/useFetchMovies.ts', () => ({
   useFetchMovies: jest.fn(),
 }));
+
+jest.mock('next/router', () => require('next-router-mock'));
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -62,7 +65,7 @@ describe('Without data', () => {
 });
 
 describe('With data', () => {
-  it('renders movies', () => {
+  it('renders movies', async () => {
     (useFetchMovies as jest.Mock).mockImplementation(() => ({
       movies: mockMovies,
       isLoading: false,
@@ -79,5 +82,23 @@ describe('With data', () => {
     expect(header).toBeInTheDocument();
     const movies = screen.getAllByTestId(/^movie-/);
     expect(movies).toHaveLength(20);
+  });
+
+  it('renders movie details', async () => {
+    (useFetchMovies as jest.Mock).mockImplementation(() => ({
+      movies: mockMovies,
+      isLoading: false,
+    }));
+    mockRouter.setCurrentUrl('/movie/76600');
+    render(
+      <QueryClientProvider client={queryClient}>
+        <Layout>
+          <Home />
+        </Layout>
+      </QueryClientProvider>
+    );
+
+    const movieDetails = screen.getByTestId('movie-details');
+    expect(movieDetails).toBeInTheDocument();
   });
 });

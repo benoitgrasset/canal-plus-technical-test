@@ -16,7 +16,7 @@ const MovieCard: FC<{ result: Result }> = ({ result }) => {
 
   return (
     <div key={id} className={classes.movie} data-testid={`movie-${id}`}>
-      <Link href={`/movie/${id}`}>
+      <Link href={`/movie/${id}`} data-testid={`movieLink-${id}`}>
         <div className={classes.imgWrapper}>
           <Image
             fill

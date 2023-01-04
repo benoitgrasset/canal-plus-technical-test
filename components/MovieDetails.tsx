@@ -35,7 +35,7 @@ const MovieDetails: FC<Props> = ({ result }) => {
   const classes = useStyles({ backdropPath });
 
   return (
-    <div className={classes.movieDetails}>
+    <div className={classes.movieDetails} data-testid="movie-details">
       <div className={classes.movieBackground}>
         <div className={classes.customBg}>
           <div className={classes.flexContainer}>
