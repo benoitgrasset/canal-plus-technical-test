@@ -77,7 +77,7 @@ const Home: FC = () => {
     return <Loader />;
   }
 
-  if (!movies || !movies.pages[0].results) {
+  if (!movies?.pages[0].results) {
     return <NoData />;
   }
 
